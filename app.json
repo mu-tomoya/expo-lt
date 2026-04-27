@@ -39,6 +39,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "da8480f0-640e-4e17-a7db-9d0a29a4893f"
+      }
+    },
+    "owner": "tomoya_masaki"
   }
 }
