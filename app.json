@@ -34,7 +34,9 @@
             "imageWidth": 76
           }
         }
-      ]
+      ],
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -46,6 +48,12 @@
         "projectId": "da8480f0-640e-4e17-a7db-9d0a29a4893f"
       }
     },
-    "owner": "tomoya_masaki"
+    "owner": "tomoya_masaki",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/da8480f0-640e-4e17-a7db-9d0a29a4893f"
+    }
   }
 }
