@@ -1,4 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useRef } from 'react';
+import { Animated, Easing, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Spacing } from '@/constants/theme';
@@ -19,13 +20,50 @@ const COLORS = [
 ];
 
 export default function HomeScreen() {
+  const rotation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.timing(rotation, {
+        toValue: 1,
+        duration: 5000,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      })
+    );
+
+    animation.start();
+
+    return () => {
+      animation.stop();
+      rotation.stopAnimation();
+    };
+  }, [rotation]);
+
+  const animatedRotationStyle = {
+    transform: [
+      {
+        rotate: rotation.interpolate({
+          inputRange: [0, 1],
+          outputRange: ['0deg', '360deg'],
+        }),
+      },
+    ],
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.grid}>
           {COLORS.map((color, index) => (
             <View key={index} style={styles.tileContainer}>
-              <View style={[styles.tile, { backgroundColor: color.hex }]} />
+              <Animated.View
+                style={[
+                  styles.tile,
+                  animatedRotationStyle,
+                  { backgroundColor: color.hex },
+                ]}
+              />
               <Text style={styles.colorName}>{color.name}</Text>
             </View>
           ))}
@@ -53,6 +91,7 @@ const styles = StyleSheet.create({
   tileContainer: {
     alignItems: 'center',
     marginBottom: Spacing.two,
+    padding: Spacing.one,
   },
   tile: {
     width: 100,
