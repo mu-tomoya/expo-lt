@@ -25,7 +25,7 @@ export default function HomeScreen() {
         <View style={styles.grid}>
           {COLORS.map((color, index) => (
             <View key={index} style={styles.tileContainer}>
-              <View style={[styles.tile, { backgroundColor: color.hex }]} />
+              <View style={[color.name === 'Blue' ? styles.tileBlue : styles.tile, { backgroundColor: color.hex }]} />
               <Text style={styles.colorName}>{color.name}</Text>
             </View>
           ))}
@@ -57,6 +57,17 @@ const styles = StyleSheet.create({
   tile: {
     width: 100,
     height: 100,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+    elevation: 5,
+    marginBottom: Spacing.one,
+  },
+  tileBlue: {
+    width: 200,
+    height: 200,
     borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
